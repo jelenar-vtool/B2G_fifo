@@ -1,4 +1,4 @@
-setenv fifo_training `pwd`
+setenv training_dir `pwd`
 
-echo fifo_training = $fifo_training
+echo training_dir = $training_dir
 

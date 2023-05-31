@@ -21,13 +21,13 @@ while getopts ':t:s:g:c:v:o:l:q:i:d:' flag; do
 		  q) quitcount="${OPTARG}" ;;
         o) coverage='-covoverwrite -coverage all' ;;
         l) linedebug='-linedebug' ;; 
-	d) rm -rf $fifo_training/log_dir
+	d) rm -rf $training_dir/log_dir
            exit ;;
         *) echo "Unexpected option ${flag}" ;;
     esac
 done
 
-cd $fifo_training
+cd $training_dir
 if [ $just_comp == 0 ] ; then
    if [ -n "$seed" ] && [ "$seed" -eq "$seed" ] 2>/dev/null; then
      echo "Running test for seed: $seed"
@@ -78,10 +78,9 @@ if [ -z $gui ]; then
 fi
 
 if [ $just_comp == 0 ] ; then
-echo "${sim_runner} -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
+echo "${sim_runner} -uvmhome CDNS-1.2 -assert -64bit -clean -sysv ${gui} -access +rw ${coverage} -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
 xrun\
     -clean \
-    -coverage ALL \
     -64bit\
     -timescale 1ns/1ns \
     -sysv \

@@ -1,22 +1,22 @@
-+incdir+${fifo_training}/rtl 
-${fifo_training}/rtl/design.sv 
++incdir+${training_dir}/rtl 
+${training_dir}/rtl/design.sv 
 
-+incdir+${fifo_training}/sv/env
-+incdir+${fifo_training}/sv/vip
++incdir+${training_dir}/sv/env
++incdir+${training_dir}/sv/vip
 
-${fifo_training}/sv/vip/fifo_if.sv
+${training_dir}/sv/vip/fifo_if.sv
 
-+incdir+${fifo_training}/sv/sequences
++incdir+${training_dir}/sv/sequences
 
 
-${fifo_training}/sv/vip/fifo_pkg.sv
+${training_dir}/sv/vip/fifo_pkg.sv
 
-+incdir+${fifo_training}/ral
-${fifo_training}/ral/fifo_ral_pkg.sv 
++incdir+${training_dir}/ral
+${training_dir}/ral/fifo_ral_pkg.sv 
 
-#${fifo_training}/sv/env/fifo_env_pkg.sv
+#${training_dir}/sv/env/fifo_env_pkg.sv
 
-+incdir+${fifo_training}/sv/tests
++incdir+${training_dir}/sv/tests
 
-+incdir+${fifo_training}/tb
-${fifo_training}/tb/top.sv
++incdir+${training_dir}/tb
+${training_dir}/tb/top.sv

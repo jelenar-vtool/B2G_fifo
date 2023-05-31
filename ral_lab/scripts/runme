@@ -78,10 +78,9 @@ if [ -z $gui ]; then
 fi
 
 if [ $just_comp == 0 ] ; then
-echo "${sim_runner} -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
+echo "${sim_runner} -uvmhome CDNS-1.2 -assert -64bit -clean -sysv ${gui} -access +rw ${coverage} -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
 xrun\
     -clean \
-    -coverage ALL \
     -64bit\
     -timescale 1ns/1ns \
     -sysv \
