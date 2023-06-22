@@ -1,0 +1,163 @@
+# SimVision Command Script (Fri Jan 20 10:21:00 AM IST 2023)
+#
+# Version 22.03.s002
+#
+# You can restore this configuration with:
+#
+#     simvision -input simvision.svcf
+#
+
+
+#
+# Preferences
+#
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-txe_waveform_toggle-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  position -pos 2
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  position -pos 1
+}
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+mmap new  -reuse -name signal_colors -radix %x -contents {{%b=0 -bgcolor #999999 -bgstipple maxim_xhatch -font -*-courier-bold-r-normal--12-* -linecolor #999999 -shape x}
+{%b=001 -bgcolor #ffff00 -font -*-courier-medium-r-normal--12-* -shape bus -textcolor #000000}
+{%b=010 -bgcolor #ff0000 -font -*-courier-medium-r-normal--12-* -shape bus -textcolor #000000}
+{%b=011 -bgcolor #0099ff -font -*-courier-medium-r-normal--12-* -shape bus -textcolor #000000}
+{%b=100 -bgcolor #99ff00 -font -*-courier-medium-r-normal--12-* -shape bus -textcolor #000000}
+{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}}
+mmap new  -reuse -name {New map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+mmap new  -reuse -name red_signal -radix %x -contents {{%b=0 -bgcolor #999999 -bgstipple maxim_xhatch -font -*-courier-medium-r-normal--12-* -shape bus}
+{%b=1 -bgcolor #ff0000 -font -*-courier-bold-r-normal--12-* -icon redLight -shape bus -textcolor #000000}}
+mmap new  -reuse -name yellow_signal -radix %x -contents {{%x=0 -bgcolor #999999 -bgstipple maxim_xhatch -font -*-courier-medium-r-normal--12-* -shape bus}
+{%x=1 -bgcolor #ffff00 -font -*-courier-bold-r-normal--12-* -icon yellowLight -shape bus -textcolor #000000}}
+mmap new  -reuse -name green_signal -radix %x -contents {{%x=0 -bgcolor #999999 -bgstipple maxim_xhatch -font -*-courier-medium-r-normal--12-* -shape bus}
+{%x=1 -bgcolor #99ff00 -font -*-courier-bold-r-normal--12-* -icon greenLight -shape bus -textcolor #000000}}
+mmap new  -reuse -name day_state -radix %x -contents {{%x=0 -bgcolor #ffffff -bgstipple gray25 -font -*-courier-bold-r-normal--12-* -label DAYTIME -shape x -textcolor #ffffff}
+{%x=1 -bgcolor #000000 -bgstipple gray25 -font -*-courier-bold-r-normal--12-* -label NIGHTTIME -shape x}}
+mmap new  -reuse -name {New map #2} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 2556x1276+0+25}] != ""} {
+    window geometry "Waveform 1" 2556x1276+0+25
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units fs \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.broken}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.r_l}]}
+	} ]]
+waveform format $id -radix red_signal
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.y_l}]}
+	} ]]
+waveform format $id -radix yellow_signal
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.g_l}]}
+	} ]]
+waveform format $id -radix green_signal
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.Q}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.nextQ}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.QQ[1:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.nextQQ[1:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.time_of_day}]}
+	} ]]
+waveform format $id -radix day_state
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.day_switch}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.day_switch_cnt[8:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.day_switch_cnt_th[8:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.lights_state[1:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.lights_switch}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.lights_switch_cnt[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.lights_switch_cnt_th[5:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.dut_sva.a_go_stop}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.dut_sva.a_stop_go}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {traffic_lights_tb.dut.dut_sva.a_yellow_blink}]}
+	} ]]
+waveform hierarchy collapse $id
+
+waveform xview limits 0 20000000000fs
+waveform delta load {-item baseline -value 0} {-item {cursor baseline} -value 0} {-item {cursor baseline} -value 0}
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 600x250+2560+25
+

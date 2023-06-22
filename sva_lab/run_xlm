@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ROOT_DIR=$PWD
+
+xrun -sv +access+r -top traffic_lights_tb -abvevalnochange \
+$ROOT_DIR/traffic_lights.v \
+$ROOT_DIR/traffic_lights_tb.v \
+$ROOT_DIR/traffic_lights_assertions.sv
