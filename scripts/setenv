@@ -1,4 +1,8 @@
-setenv training_dir `pwd`
+setenv fifo_training `pwd`
+setenv labs_home $home/../../space/users/$user/verif_trainig_v2/
+setenv scripts $home/../../space/users/$user/verif_trainig_v2/scripts
+echo labs_home = $labs_home
+echo fifo_training = $fifo_training
+echo scripts = $scripts
 
-echo training_dir = $training_dir
 

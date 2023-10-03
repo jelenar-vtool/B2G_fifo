@@ -1,0 +1,4 @@
+setenv fifo_training `pwd`
+
+echo fifo_training = $fifo_training
+

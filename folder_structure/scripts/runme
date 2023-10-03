@@ -21,13 +21,13 @@ while getopts ':t:s:g:c:v:o:l:q:i:d:' flag; do
 		  q) quitcount="${OPTARG}" ;;
         o) coverage='-covoverwrite -coverage all' ;;
         l) linedebug='-linedebug' ;; 
-	d) rm -rf $fifo_training/log_dir
+	d) rm -rf $training_dir/log_dir
            exit ;;
         *) echo "Unexpected option ${flag}" ;;
     esac
 done
 
-cd $fifo_training
+cd $training_dir
 if [ $just_comp == 0 ] ; then
    if [ -n "$seed" ] && [ "$seed" -eq "$seed" ] 2>/dev/null; then
      echo "Running test for seed: $seed"
@@ -85,24 +85,22 @@ xrun\
     -64bit\
     -timescale 1ns/1ns \
     -sysv \
-    -access +rwc \
+    -access +rw \
     -uvmhome CDNS-1.2 \
     -seed ${seed} \
     ${coverage} \
     ${gui} \
-    -l ${testname} \
-    -f $scripts/filelist.f \
+    -f ../../filelist.f \
     +UVM_TESTNAME=$testname \
 	+UVM_VERBOSITY=${verbosity} \
 	+UVM_MAX_QUIT_COUNT=${quitcount}\
 	+define+IXCOM_1X\
     ${linedebug} \
     $run_n_exit > "$testfile";
-    # simvisdbutil -64bit -sst2 -overwrite dump.vcd;
 else
-cd $fifo_training/sv/tb;
+cd ../../tb;
 echo "${sim_runner} NO TEST -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -verbosity ${verbosity} ${linedebug} -seed ${seed} " 
-xrun top.sv -timescale 1ns/1ns -sysv -access +rwc -uvm -uvmhome CDNS-1.2 -seed ${seed} +UVM_VERBOSITY=${verbosity} -f $scripts/filelist.f;
+xrun top.sv -timescale 1ns/1ns -sysv -access +rw -uvm -uvmhome CDNS-1.2 -seed ${seed} +UVM_VERBOSITY=${verbosity} -f ../filelist.f;
 mv xrun.log log.log
-mv log.log ../../log_dir/testdir
+mv log.log ../log_dir/testdir
 fi
