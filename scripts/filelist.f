@@ -14,7 +14,7 @@ ${fifo_training}/sv/uvc/b2gfifo_pkg.sv
 +incdir+${fifo_training}/ral
 ${fifo_training}/ral/b2gfifo_ral_pkg.sv 
 
-#${fifo_training}/sv/env/b2gfifo_env_pkg.sv
+${fifo_training}/sv/env/b2gfifo_env_pkg.sv
 
 +incdir+${fifo_training}/sv/tests
 

@@ -1,7 +1,7 @@
 class b2gfifo_simple_base_test extends uvm_test;
     `uvm_component_utils(b2gfifo_simple_base_test)
 
-    b2gfifo_agent agent;
+    b2gfifo_env env;
     b2gfifo_cfg cfg;
 
     extern function new(string name = "b2gfifo_simple_base_test", uvm_component parent=null);
@@ -20,7 +20,7 @@ endfunction : new
 function void b2gfifo_simple_base_test::build_phase(uvm_phase phase);
     super.build_phase(phase);
     
-    agent = b2gfifo_agent::type_id::create("agent", this);
+    env = b2gfifo_env::type_id::create("env", this);
     cfg = b2gfifo_cfg::type_id::create("cfg", this);
     
     cfg.set_default_config();
@@ -45,10 +45,8 @@ function void  b2gfifo_simple_base_test::start_of_simulation_phase(uvm_phase pha
 	set_report_verbosity_level_hier(verbosity);
 	svr.set_max_quit_count(1000); //maximum number of errors 
 	
-	uvm_config_db#(uvm_object_wrapper)::set(this, "agent.m_seqr.run_phase", "default_sequence", 
+	uvm_config_db#(uvm_object_wrapper)::set(this, "env.agent.m_seqr.run_phase", "default_sequence", 
 	                                       b2gfifo_master_sequence::type_id::get());
-	                                       
-    
 endfunction
 
 //-------------------------------------------------------------------------------------------------------------
