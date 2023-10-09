@@ -64,12 +64,6 @@ endfunction
 //-------------------------------------------------------------------------------------------------------------
 task b2gfifo_simple_base_test::run_phase(uvm_phase phase);
     super.run_phase(phase);
-    /*seq = b2gfifo_master_sequence::type_id::create("seq", this);
-    
-    phase.raise_objection(this);
-    seq.start(sequencer);
-    #40;
-    phase.drop_objection(this);*/ 
 endtask
 
 
