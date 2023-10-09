@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check for the correct number of arguments
+if [ "$#" -ne 2 ]; then
+    echo "ERROR: Not enough arguments!"
+    echo "Correct usage: $0 <source_lab_folder> <target_lab_folder>"
+    exit 1
+fi
+
+source_lab="$1"
+target_lab="$2"
+
+# Define the source and target directories
+source_dir="${labs_home}/verif_training/${source_lab}"
+target_dir="${labs_home}/verif_training/${target_lab}"
+
+# Check if the source directory exists
+if [ ! -d "$source_dir" ]; then
+    echo "Source directory '$source_dir' does not exist."
+    exit 1
+fi
+# Check if the target directory exists
+if [ ! -d "$target_dir" ]; then
+    echo "Target directory '$target_dir' does not exist."
+    exit 1
+fi
+
+# Copy the files from the source directory to the target directory
+cp $source_dir/sv/tb/* $target_dir/sv/tb/
+cp $source_dir/sv/uvc/* $target_dir/sv/uvc/
+cp $source_dir/sv/env/* $target_dir/sv/env/
+cp $source_dir/ral/* $target_dir/ral/
