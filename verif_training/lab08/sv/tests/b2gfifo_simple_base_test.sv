@@ -13,7 +13,9 @@ endfunction : new
 //-------------------------------------------------------------------------------------------------------------
 task b2gfifo_simple_base_test::run_phase(uvm_phase phase);
     super.run_phase(phase);
+    phase.raise_objection(this);
     #1ms;
+    phase.drop_objection(this);
 endtask
 
 
