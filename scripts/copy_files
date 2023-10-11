@@ -26,7 +26,18 @@ if [ ! -d "$target_dir" ]; then
 fi
 
 # Copy the files from the source directory to the target directory
-cp $source_dir/sv/tb/* $target_dir/sv/tb/
-cp $source_dir/sv/uvc/* $target_dir/sv/uvc/
-cp $source_dir/sv/env/* $target_dir/sv/env/
-cp $source_dir/ral/* $target_dir/ral/
+if [ -d "$source_dir/sv/tb" ]; then
+    cp -R $source_dir/sv/tb/* $target_dir/sv/tb
+fi
+
+if [ -d "$source_dir/sv/uvc" ]; then
+    cp -R $source_dir/sv/uvc/* $target_dir/sv/uvc
+fi
+
+if [ -d "$source_dir/sv/env" ]; then
+    cp -R $source_dir/sv/env/* $target_dir/sv/env
+fi
+
+if [ -d "$source_dir/ral" ]; then
+    cp -R $source_dir/ral/* $target_dir/ral
+fi
