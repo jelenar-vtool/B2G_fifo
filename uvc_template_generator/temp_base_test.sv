@@ -15,6 +15,7 @@ class temp_base_test extends uvm_test;
     extern virtual function void start_of_simulation_phase(uvm_phase phase);
     extern virtual function void report_phase(uvm_phase phase);
     extern virtual function void set_default_configuration ();
+    extern virtual function void set_configuration (); //Override this function to create different configuration
 endclass 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -33,11 +34,8 @@ function void  temp_base_test::build_phase(uvm_phase phase);
     `uvm_info("build_phase", "Enviroment created.", UVM_HIGH)
     cfg = temp_cfg::type_id::create("cfg", this);
     cfg_randomize();
-    set_default_configuration();
-    cfg_env.has_master_agent_1 = 1;
-    cfg_env.has_slave_agent_1 = 1;
-    cfg_env.master_config.agent_type = MASTER;
-    cfg_env.slave_config.agent_type = SLAVE;
+    set_configuration();
+    
     uvm_config_db#(temp_env_cfg)::set(this,"env","cfg_env", cfg_env);
     uvm_config_db#(temp_cfg)::set(this, "*", "cfg", cfg);
 endfunction : build_phase
@@ -52,9 +50,16 @@ function void temp_base_test::cfg_randomize();
 endfunction : cfg_randomize
 
 //-------------------------------------------------------------------------------------------------------------
+function void temp_base_test::set_configuration();
+    set_default_configuration();
+endfunction
+
+//-------------------------------------------------------------------------------------------------------------
 function void temp_base_test::set_default_configuration ();
-    cfg_env.has_master_agent_1 = 1;     
-    cfg_env.has_slave_agent_1 = 1;
+    cfg_env.has_master_agent = 1;
+    cfg_env.has_slave_agent = 1;
+    cfg_env.master_config.agent_type = MASTER;
+    cfg_env.slave_config.agent_type = SLAVE;
     `uvm_info("config", "Default configuration set.", UVM_HIGH)
 endfunction : set_default_configuration
 

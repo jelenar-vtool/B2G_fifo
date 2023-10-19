@@ -48,10 +48,10 @@ endfunction : build_phase
 function void temp_env:: connect_phase (uvm_phase phase);
     super.connect_phase(phase);
     //connect monitor to scb !!!
-    if (cfg_env.has_master_agent_1 == 1) begin
+    if (cfg_env.has_master_agent == 1) begin
     master_agent.m_mon.temp_mon_analysis_port.connect(sb.m_mon_imp);
     end
-    if (cfg_env.has_slave_agent_1 == 1) begin    
+    if (cfg_env.has_slave_agent == 1) begin    
     slave_agent.m_mon.temp_mon_analysis_port.connect(sb.s_mon_imp); 
     end
 

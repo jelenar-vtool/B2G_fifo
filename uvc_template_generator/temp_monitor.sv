@@ -29,7 +29,7 @@ endclass // temp_monitor_class
 //-----------------------------------------------------------------------
 function temp_monitor::new (string name, uvm_component parent);
     super.new(name, parent);
-    temp_trans = new();
+    temp_trans = temp_item::type_id::create("temp_trans", this);
 endfunction   
 
 //-------------------------------------------------------------------------------------------------------------

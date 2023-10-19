@@ -6,7 +6,6 @@ interface temp_if #(parameter ADDR = 32, parameter DATA = 32)(input bit system_c
     task wait_n_clocks(int N);
         // * * * This task is just a blocking function that waits N clock cycles. * * *
         repeat(N) @(posedge system_clock);
-        #10;
     endtask
 	
     // * * * You can add assertion checkers bellow * * * 

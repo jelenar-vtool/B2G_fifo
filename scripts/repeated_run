@@ -9,7 +9,7 @@ while getopts ':t:q:v:n:' flag; do
 done
 
 
-cd $training_dir
+cd $fifo_training
 
 if [ ! -d log_dir ]; then
   mkdir log_dir
@@ -33,7 +33,7 @@ do
 	  	mkdir "$RUN"_"$testname"_"$seed"
 	fi
 	cd "$RUN"_"$testname"_"$seed"
-	xrun -clean -coverage ALL -64bit -timescale 1ns/1ns -sysv -access +rw -uvmhome CDNS-1.2 -seed ${seed} -covoverwrite -coverage all  -f ../../../filelist.f +UVM_TESTNAME=$testname +UVM_VERBOSITY=${verbosity} +UVM_MAX_QUIT_COUNT=${quitcount} > $testfile
+	xrun -clean -coverage ALL -64bit -timescale 1ns/1ns -sysv -access +rw -uvmhome CDNS-1.2 -seed ${seed} -covoverwrite -coverage all  -f $scripts/filelist.f +UVM_TESTNAME=$testname +UVM_VERBOSITY=${verbosity} +UVM_MAX_QUIT_COUNT=${quitcount} > $testfile
 	
 
 	cd ../

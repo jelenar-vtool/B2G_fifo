@@ -52,11 +52,11 @@ endfunction // temp_master_agent::buid_phase
 
 //-------------------------------------------------------------------------------------------------------------
 function void temp_agent::connect_phase(uvm_phase phase);
-    if (get_is_active() == UVM_ACTIVE &&  cfg.agent_type == 0) begin  //
+    if (get_is_active() == UVM_ACTIVE && cfg.agent_type == MASTER) begin  //
         m_drv.seq_item_port.connect(m_seqr.seq_item_export);
         `uvm_info("connect_phase_temp_agent", "master driver connected.", UVM_LOW);
     end
-    if (get_is_active() == UVM_ACTIVE &&  cfg.agent_type == 1) begin  //
+    if (get_is_active() == UVM_ACTIVE && cfg.agent_type == SLAVE) begin  //
         s_drv.seq_item_port.connect(s_seqr.seq_item_export);
         `uvm_info("connect_phase_temp_agent", "slave driver connected.", UVM_LOW);
     end

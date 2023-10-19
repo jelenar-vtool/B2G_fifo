@@ -27,7 +27,6 @@ endfunction : new
 //-------------------------------------------------------------------------------------------------------------
 function void temp_extended_test::build_phase(uvm_phase phase);
     super.build_phase(phase);
-	super.set_default_configuration();
 	m_seq = temp_master_sequence :: type_id :: create ("m_seq");
 	s_seq = temp_slave_sequence :: type_id :: create ("s_seq");
 endfunction : build_phase

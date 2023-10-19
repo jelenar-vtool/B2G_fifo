@@ -1,8 +1,15 @@
+#!/usr/bin/tcsh -f
+
 setenv fifo_training `pwd`
-setenv labs_home $home/../../space/users/$user/verif_training
-setenv scripts $home/../../space/users/$user/verif_training/scripts
+
+if ( ! ${?labs_home} ) then
+    setenv labs_home $fifo_training
+endif
+
+if ( ! ${?scripts} ) then
+    setenv scripts $fifo_training/scripts
+endif
+
 echo labs_home = $labs_home
 echo fifo_training = $fifo_training
 echo scripts = $scripts
-
-
