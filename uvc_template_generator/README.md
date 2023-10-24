@@ -1,2 +1,0 @@
-# uvc_template
-

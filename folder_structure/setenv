@@ -1,4 +1,0 @@
-setenv training_dir `pwd`
-
-echo training_dir = $training_dir
-

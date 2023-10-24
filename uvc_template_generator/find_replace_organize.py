@@ -1,3 +1,4 @@
+
 import glob, os
 import argparse
 import sys
@@ -6,10 +7,9 @@ parser = argparse.ArgumentParser(description='Sets up a UVC file hierarchy from 
 			                                  Changes the names of the files and UVC classes \
 			                                  with the names given by the user.')
 			     
-parser.add_argument('-temp_dir', nargs=1, help='Path to the template files')
-parser.add_argument('-uvc_dir', nargs=1, help='Path to where the UVC files will be saved')
-parser.add_argument('-temp_name', nargs=1, help='The name used in template (default is "temp"')
-parser.add_argument('-uvc_name', nargs=1, help='The UVC name ("temp" will be replaced in all files with this)')
+parser.add_argument('-temp_dir', nargs=1, help='Path to the template directory.')
+parser.add_argument('-uvc_dir', nargs=1, help='Path to where the UVC files will be saved.')
+parser.add_argument('-uvc_name', nargs=1, help='The UVC name ("temp" will be replaced in all files with this). Example: use "apb" for APB UVC.')
 
 args = parser.parse_args()
 
@@ -23,19 +23,29 @@ uvc_name = "uvc"
 if args.temp_dir != None:
     if os.path.isdir(args.temp_dir[0]):
         temp_dir = os.path.abspath(args.temp_dir[0])
+else :
+    print("ERROR: Missing -temp_dir argument.\n")
+    parser.print_help(sys.stderr)
+    sys.exit()
 print(f'Template directory: {temp_dir}')
 
-if args.temp_name != None:
-    temp_name = args.temp_name[0]
-print(f'Template name is: {temp_name}')
 
 if args.uvc_name != None:
     uvc_name = args.uvc_name[0]
+else :
+    print("ERROR: Missing -uvc_name argument.\n")
+    parser.print_help(sys.stderr)
+    sys.exit()
+    
 print(f'UVC name is: {uvc_name}')
 
 if args.uvc_dir != None:
     if os.path.isdir(args.uvc_dir[0]):
         uvc_create_dir = os.path.abspath(args.uvc_dir[0])
+else :
+    print("ERROR: Missing -uvc_dir argument.\n")
+    parser.print_help(sys.stderr)
+    sys.exit()
 
 uvc_root_dir = f'{uvc_create_dir}//{uvc_name}_uvc'
 
