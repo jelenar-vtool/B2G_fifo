@@ -9,7 +9,7 @@ while getopts ':t:q:v:n:' flag; do
 done
 
 
-cd $fifo_training
+cd $work_area
 
 if [ ! -d log_dir ]; then
   mkdir log_dir

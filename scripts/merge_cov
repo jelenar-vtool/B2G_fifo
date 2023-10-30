@@ -6,7 +6,7 @@ while getopts ':t:' flag; do
 done
 
 
-cd $fifo_training
+cd $work_area
 if [ -d cov_work ]; then
 rm -rf cov_work
 fi

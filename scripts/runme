@@ -23,7 +23,7 @@ while getopts ':t:s:g:c:v:o:l:q:i:f:d:' flag; do
         o) coverage='-covoverwrite -coverage all' ;;
         l) linedebug='-linedebug' ;; 
         f) filelist_path="${OPTARG}" ;;
-	d) rm -rf $fifo_training/log_dir
+	d) rm -rf $work_area/log_dir
            exit ;;
         *) echo "Unexpected option ${flag}" ;;
     esac
@@ -34,7 +34,7 @@ if [ ! -f "${filelist_path}" ] ; then
     exit;
 fi
 
-cd $fifo_training
+cd $work_area
 if [ $just_comp == 0 ] ; then
    if [ -n "$seed" ] && [ "$seed" -eq "$seed" ] 2>/dev/null; then
      echo "Running test for seed: $seed"
@@ -107,7 +107,7 @@ echo "${sim_runner} -clean -timescale 1ns/1ns -64bit ${coverage} -sysv ${gui} -a
     $run_n_exit > "$testfile";
     # simvisdbutil -64bit -sst2 -overwrite dump.vcd;
 else
-cd $fifo_training/sv/tb;
+cd $work_area/sv/tb;
 echo "${sim_runner} NO TEST -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -verbosity ${verbosity} ${linedebug} -seed ${seed} " 
 xrun top.sv -timescale 1ns/1ns -sysv -access +rwc -uvm -uvmhome CDNS-1.2 -seed ${seed} +UVM_VERBOSITY=${verbosity} -f $scripts/filelist.f;
 mv xrun.log log.log

@@ -1,22 +1,22 @@
 +incdir+${labs_home}/rtl/bin2gray_fifo_design_bugs
 ${labs_home}/rtl/bin2gray_fifo_design_bugs/design.sv 
 
-+incdir+${fifo_training}/sv/uvc
++incdir+${work_area}/sv/uvc
 
-${fifo_training}/sv/uvc/b2gfifo_if.sv
+${work_area}/sv/uvc/b2gfifo_if.sv
 
-+incdir+${fifo_training}/sv/sequences
++incdir+${work_area}/sv/sequences
 
 
-${fifo_training}/sv/uvc/b2gfifo_pkg.sv
+${work_area}/sv/uvc/b2gfifo_pkg.sv
 
-+incdir+${fifo_training}/ral
-${fifo_training}/ral/b2gfifo_ral_pkg.sv 
++incdir+${work_area}/ral
+${work_area}/ral/b2gfifo_ral_pkg.sv 
 
-+incdir+${fifo_training}/sv/env
-${fifo_training}/sv/env/b2gfifo_env_pkg.sv
++incdir+${work_area}/sv/env
+${work_area}/sv/env/b2gfifo_env_pkg.sv
 
-+incdir+${fifo_training}/sv/tests
++incdir+${work_area}/sv/tests
 
-+incdir+${fifo_training}/sv/tb
-${fifo_training}/sv/tb/top.sv
++incdir+${work_area}/sv/tb
+${work_area}/sv/tb/top.sv
