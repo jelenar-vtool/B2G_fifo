@@ -8,8 +8,9 @@ just_comp=0
 testdir="testdir"
 testfile="log.log"
 clean='0'
+filelist_path=$scripts/filelist.f
 
-while getopts ':t:s:g:c:v:o:l:q:i:d:' flag; do
+while getopts ':t:s:g:c:v:o:l:q:i:f:d:' flag; do
 
     case "${flag}" in
         s) seed="${OPTARG}" ;;
@@ -21,11 +22,17 @@ while getopts ':t:s:g:c:v:o:l:q:i:d:' flag; do
 		  q) quitcount="${OPTARG}" ;;
         o) coverage='-covoverwrite -coverage all' ;;
         l) linedebug='-linedebug' ;; 
+        f) filelist_path="${OPTARG}" ;;
 	d) rm -rf $fifo_training/log_dir
            exit ;;
         *) echo "Unexpected option ${flag}" ;;
     esac
 done
+
+if [ ! -f "${filelist_path}" ] ; then
+    echo "Filelist ${filelist_path} not found.";
+    exit;
+fi
 
 cd $fifo_training
 if [ $just_comp == 0 ] ; then
@@ -46,6 +53,7 @@ fi
 if [ ! -d log_dir ]; then
   mkdir log_dir
 fi
+
 cd log_dir;
 
 if [ ! -d "$testdir" ]; then
@@ -78,10 +86,9 @@ if [ -z $gui ]; then
 fi
 
 if [ $just_comp == 0 ] ; then
-echo "${sim_runner} -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
-xrun\
+echo "${sim_runner} -clean -timescale 1ns/1ns -64bit ${coverage} -sysv ${gui} -access +rwc -testname ${testname} -verbosity ${verbosity} ${linedebug} -seed ${seed} -quitcount ${quitcount}"
+    xrun\
     -clean \
-    -coverage ALL \
     -64bit\
     -timescale 1ns/1ns \
     -sysv \
@@ -91,7 +98,7 @@ xrun\
     ${coverage} \
     ${gui} \
     -l ${testname} \
-    -f $scripts/filelist.f \
+    -f ${filelist_path} \
     +UVM_TESTNAME=$testname \
 	+UVM_VERBOSITY=${verbosity} \
 	+UVM_MAX_QUIT_COUNT=${quitcount}\
