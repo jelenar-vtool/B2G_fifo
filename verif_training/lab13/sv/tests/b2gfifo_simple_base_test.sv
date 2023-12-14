@@ -3,6 +3,7 @@ class b2gfifo_simple_base_test extends uvm_test;
 
     b2gfifo_env m_env;
     b2gfifo_env_cfg m_env_cfg;
+    
 
     extern function new(string name = "b2gfifo_simple_base_test", uvm_component parent=null);
     extern virtual function void build_phase(uvm_phase phase);
@@ -24,6 +25,8 @@ function void b2gfifo_simple_base_test::build_phase(uvm_phase phase);
     m_env_cfg = b2gfifo_env_cfg::type_id::create("m_env_cfg", this);
 
     m_env_cfg.set_default_config();
+    m_env_cfg.m_agent_cfg.set_default_config();
+	
     
     uvm_config_db#(b2gfifo_cfg)::set(this, "m_env.m_agent", "cfg", m_env_cfg.m_agent_cfg);
 endfunction : build_phase

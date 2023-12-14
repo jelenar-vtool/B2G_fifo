@@ -64,6 +64,7 @@ endfunction
 //-------------------------------------------------------------------------------------------------------------
 task b2gfifo_simple_base_test::run_phase(uvm_phase phase);
     super.run_phase(phase);
+
 endtask
 
 

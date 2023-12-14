@@ -1,0 +1,8 @@
+TOOL:	xrun(64)	22.03-s002: Started on Nov 17, 2023 at 13:53:32 UTC
+xrun(64): 22.03-s002: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/uvc/b2gfifo_if.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/uvc/b2gfifo_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/ral/b2gfifo_ral_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/env/b2gfifo_env_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/tb/top.sv.
+TOOL:	xrun(64)	22.03-s002: Exiting on Nov 17, 2023 at 13:53:33 UTC  (total: 00:00:01)

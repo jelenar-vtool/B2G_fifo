@@ -45,8 +45,8 @@ function void  b2gfifo_simple_base_test::start_of_simulation_phase(uvm_phase pha
 	set_report_verbosity_level_hier(verbosity);
 	svr.set_max_quit_count(1000); //maximum number of errors 
 	
-	uvm_config_db#(uvm_object_wrapper)::set(this, "m_env.m_agent.m_seqr.run_phase", "default_sequence", 
-	                                       b2gfifo_master_sequence::type_id::get());
+	uvm_config_db#(uvm_object_wrapper)::set(this, "m_env.m_virt_seqr", "default_sequence", 
+	                                       b2gfifo_virtual_sequence::type_id::get());
 endfunction
 
 //-------------------------------------------------------------------------------------------------------------
@@ -65,8 +65,3 @@ task b2gfifo_simple_base_test::run_phase(uvm_phase phase);
     test_seq.start(m_env.m_virt_seqr);
     phase.drop_objection(this);
 endtask
-
-
-
-
-

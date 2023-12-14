@@ -31,8 +31,8 @@ module simple_bin2gray (clk, rst_n, enable, addr, write, read, wdata, rdata, res
   always_comb begin
 	fifo_rd = enable && rst_n ? (addr == 'h0) && read : 0;
 	fifo_wr = enable && rst_n ? (addr == 'h0 || addr == 'h1 || addr == 'h2) && write : 0;
-	bin_data = enable && rst_n ? {7{fifo_wr}} &  wdata : 0; 
-	fifo_reg_write = enable && rst_n ? (addr == 'h3) && write && (wdata[5] == 'h1) : 0;
+	bin_data = enable && rst_n ? {8{fifo_wr}} &  wdata : 0; 
+	fifo_reg_write = enable && rst_n ? (addr == 'h3) && write && (wdata[4] == 'h1) : 0;
   end  
   
   //top level outputs 
@@ -50,6 +50,7 @@ module simple_bin2gray (clk, rst_n, enable, addr, write, read, wdata, rdata, res
  //Status registers should reflect the values from fifo
  assign CTL_STAT[7:5] = 0;
  assign CTL_STAT[4] = fifo_reg_write;
+ assign CTL_STAT[3] = fifo_underflow;
  assign CTL_STAT[2] = fifo_overflow;
  assign CTL_STAT[1] = fifo_full;
  assign CTL_STAT[0] = fifo_empty; 

@@ -1,8 +1,15 @@
 //------------------------------------------------------------------------------------------------------------
 class b2gfifo_env extends uvm_env;
+    `uvm_component_utils(b2gfifo_env)
 
-    // TODO: * * * Declare the agent and register env to factory * * *
-
+    //Declare the agent and register env to factory * * *
+   b2gfifo_env_cfg m_env_cfg; 
+   virtual interface b2gfifo_if b2gfifo_vif;
+   // agent
+   b2gfifo_agent m_agent; 
+  // other components
+   //ms_virtual_sequencer ms_virt_seqr;
+  //later scoreboard
     extern function new (string name, uvm_component parent);
     extern virtual function void build_phase (uvm_phase phase);
     extern virtual function void connect_phase (uvm_phase phase);
@@ -18,6 +25,23 @@ function void b2gfifo_env:: build_phase (uvm_phase phase);
     super.build_phase(phase);
     
     // TODO: * * * instantiate the agent * * *
+	m_env_cfg=new();
+
+   if(!uvm_config_db#(virtual b2gfifo_if)::get(this, "", "b2gfifo_vif", b2gfifo_vif)) begin
+      `uvm_fatal(get_type_name(), {"virtual interface must be set for:  b2gfifo_vif"});
+   end 
+ /*  if(!uvm_config_db#(b2gfifo_cfg)::get(this, "", "cfg", m_env_cfg.m_agent_cfg)) begin
+     `uvm_fatal(get_type_name(), "Failed to get configuration object from config DB!")
+   end*/
+   
+   // create system top env components
+  m_agent  = b2gfifo_agent::type_id::create("m_agent", this);
+   //ms_scbd        = ms_screboard::type_id::create("ms_scbd", this);
+  // ms_virt_seqr   = ms_virtual_sequencer::type_id::create ("ms_virt_seqr", this);
+   m_agent.cfg  = m_env_cfg.m_agent_cfg; //connect agent cfg with cfg from env
+
+
+
 endfunction : build_phase 
 
 //------------------------------------------------------------------------------------------------------------ 

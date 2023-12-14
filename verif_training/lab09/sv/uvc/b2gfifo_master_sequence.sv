@@ -2,7 +2,7 @@ class b2gfifo_master_sequence extends uvm_sequence #(b2gfifo_item);
  
     `uvm_object_utils(b2gfifo_master_sequence)
     `uvm_declare_p_sequencer(b2gfifo_master_sequencer)
-    
+    b2gfifo_item req;
     extern function new(string name = "b2gfifo_master_sequence");
     
     extern virtual task pre_body();   
@@ -19,9 +19,10 @@ endfunction //b2gfifo_sequence::new
 //-------------------------------------------------------------------
 task b2gfifo_master_sequence::body();
 	// * * * `uvm_do or `uvm_do_with can be used here * * * 
-    repeat(5)
+    repeat(5) begin
         `uvm_do(req)
 	#40;
+    end
 endtask 
 
 //-------------------------------------------------------------------

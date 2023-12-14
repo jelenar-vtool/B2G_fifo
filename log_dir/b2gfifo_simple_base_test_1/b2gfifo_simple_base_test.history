@@ -1,0 +1,1 @@
+s1(17Nov2023:13:53:33):  xrun -clean -64bit -timescale 1ns/1ns -sysv -access +rwc -uvmhome CDNS-1.2 -seed 1 -l b2gfifo_simple_base_test -f /space/users/jelenar/verif_training/scripts/filelist.f +UVM_TESTNAME=b2gfifo_simple_base_test +UVM_VERBOSITY=UVM_LOW +UVM_MAX_QUIT_COUNT=1 +define+IXCOM_1X +UVM_OBJECTION_TRACE -run -exit 

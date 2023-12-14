@@ -4,7 +4,7 @@ ${labs_home}/rtl/bin2gray_fifo_design_bugs/design.sv
 +incdir+${work_area}/sv/uvc
 
 ${work_area}/sv/uvc/b2gfifo_if.sv
-
+${work_area}/sv/uvc/b2gfifo_topvif.sv
 +incdir+${work_area}/sv/sequences
 
 

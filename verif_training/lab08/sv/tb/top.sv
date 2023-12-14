@@ -4,22 +4,28 @@ module top;
     `include "uvm_macros.svh"
     import uvm_pkg::*;
     import b2gfifo_test_pkg::*;
-
-
+	bit clk;
+	logic rst_n =1'b1; 
     // * * * TODO: Declare all the necessary signals * * * //
 
-    // * * * TODO: Insantiate the interface * * * //
+    //Generate the clock signal 
+	always #10 clk=~clk;
 
-    // * * * TODO: Insantiate the DUT and connect it to the interface * * * //
- 
-    // * * * TODO: Generate the clock signal * * * //
+    //Insantiate the interface
+    b2gfifo_if m_vif(clk, rst_n);     
+	always #4 rst_n=~rst_n;
+    //Insantiate the DUT and connect it to the interface
+    simple_bin2gray m_dut0 (m_vif.clk, m_vif.rst_n, m_vif.enable, m_vif.addr, m_vif.write, m_vif.read, m_vif.wdata, m_vif.rdata, m_vif.resp);
 
-    // * * * TODO: Initialize the reset signal * * * //
 
-    // * * * TODO: Pass the interface to other components through configuration database
+
+    //Initialize the reset signal 
+
+    //Pass the interface to other components through configuration database
     
     
-    initial begin      
+    initial begin    
+        uvm_config_db#(virtual b2gfifo_if)::set(null,"*","m_vif", m_vif);  
         run_test();
     end
 

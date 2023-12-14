@@ -1,0 +1,24 @@
+//`ifndef b2gfifo_PKG_SV
+//`define b2gfifo_PKG_SV
+
+//------------------------------------------------------------------------------------------------------------
+`include "uvm_macros.svh"
+
+package b2gfifo_pkg;
+    import uvm_pkg::*;
+
+ `include "b2gfifo_item.sv"
+ `include "b2gfifo_cfg.sv"
+  `include "b2gfifo_master_sequencer.sv"
+  `include "b2gfifo_master_sequence.sv"
+  `include "b2gfifo_master_driver.sv"
+  `include "b2gfifo_monitor.sv"
+
+  `include "b2gfifo_agent.sv"
+
+  //Sequences used by the m_agent
+ //`include "m_seq_lib.sv"
+endpackage 
+
+//`endif //b2gfifo_PKG_SV
+

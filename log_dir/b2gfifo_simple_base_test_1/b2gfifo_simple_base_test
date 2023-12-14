@@ -1,0 +1,44 @@
+xrun(64): 22.03-s002: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	22.03-s002: Started on Nov 17, 2023 at 13:53:32 UTC
+xrun
+	-clean
+	-64bit
+	-timescale 1ns/1ns
+	-sysv
+	-access +rwc
+	-uvmhome CDNS-1.2
+	-seed 1
+	-l b2gfifo_simple_base_test
+	-f /space/users/jelenar/verif_training/scripts/filelist.f
+		+incdir+/space/users/jelenar/verif_training/verif_training/lab10/rtl/bin2gray_fifo_design_bugs
+		/space/users/jelenar/verif_training/verif_training/lab10/rtl/bin2gray_fifo_design_bugs/design.sv
+		+incdir+/space/users/jelenar/verif_training/sv/uvc
+		/space/users/jelenar/verif_training/sv/uvc/b2gfifo_if.sv
+		+incdir+/space/users/jelenar/verif_training/sv/sequences
+		/space/users/jelenar/verif_training/sv/uvc/b2gfifo_pkg.sv
+		+incdir+/space/users/jelenar/verif_training/ral
+		/space/users/jelenar/verif_training/ral/b2gfifo_ral_pkg.sv
+		+incdir+/space/users/jelenar/verif_training/sv/env
+		/space/users/jelenar/verif_training/sv/env/b2gfifo_env_pkg.sv
+		+incdir+/space/users/jelenar/verif_training/sv/tests
+		+incdir+/space/users/jelenar/verif_training/sv/tb
+		/space/users/jelenar/verif_training/sv/tb/top.sv
+	+UVM_TESTNAME=b2gfifo_simple_base_test
+	+UVM_VERBOSITY=UVM_LOW
+	+UVM_MAX_QUIT_COUNT=1
+	+define+IXCOM_1X
+	+UVM_OBJECTION_TRACE
+	-run
+	-exit
+
+   User defined plus("+") options:
+	+UVM_VERBOSITY=UVM_LOW
+	+UVM_MAX_QUIT_COUNT=1
+	+UVM_OBJECTION_TRACE
+
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/uvc/b2gfifo_if.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/uvc/b2gfifo_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/ral/b2gfifo_ral_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/env/b2gfifo_env_pkg.sv.
+xrun: *E,FILEMIS: Cannot find the provided file /space/users/jelenar/verif_training/sv/tb/top.sv.
+TOOL:	xrun(64)	22.03-s002: Exiting on Nov 17, 2023 at 13:53:33 UTC  (total: 00:00:01)

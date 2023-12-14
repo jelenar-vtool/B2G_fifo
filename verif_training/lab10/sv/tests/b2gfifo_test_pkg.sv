@@ -1,4 +1,3 @@
-
 //`include "uvm_pkg.sv"
 
 package b2gfifo_test_pkg;

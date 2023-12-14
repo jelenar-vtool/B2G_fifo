@@ -37,7 +37,7 @@ function void  b2gfifo_simple_base_test::start_of_simulation_phase(uvm_phase pha
     uvm_verbosity verbosity = UVM_LOW;
 
 	super.start_of_simulation_phase(phase);
-	uvm_top.set_timeout(.timeout(5000), .overridable(1));
+	uvm_top.set_timeout(.timeout(5ms), .overridable(1));
 	`uvm_info("start_of_simulation_phase", $sformatf("Printing topology"), UVM_LOW)
 	uvm_top.print_topology();
 	svr = uvm_report_server::get_server();
@@ -62,9 +62,8 @@ endfunction
 //-------------------------------------------------------------------------------------------------------------
 task b2gfifo_simple_base_test::run_phase(uvm_phase phase);
     super.run_phase(phase);
+   //phase.raise_objection(this);
+   // #1ms;
+    //phase.drop_objection(this);
+
 endtask
-
-
-
-
-
