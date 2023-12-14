@@ -55,7 +55,6 @@ module traffic_lights_assertions (
 
 	// YOUR CODE HERE - END
 	// ----------------------------------------------------------------------
-	`include "solutions/ex2_solved.v"
 
 
 	// ----------------------------------------------------------------------
@@ -79,6 +78,5 @@ module traffic_lights_assertions (
 
 	// YOUR CODE HERE - END
 	// ----------------------------------------------------------------------
-	`include "solutions/ex3_solved.v"
 
 endmodule: traffic_lights_assertions

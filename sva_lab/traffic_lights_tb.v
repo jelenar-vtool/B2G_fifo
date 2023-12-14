@@ -67,4 +67,3 @@ endmodule
 
 // YOUR CODE HERE - END
 // ----------------------------------------------------------------------
-`include "solutions/ex1_solved.v"

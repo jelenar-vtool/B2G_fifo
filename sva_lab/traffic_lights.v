@@ -61,7 +61,6 @@ module traffic_lights (
 
 	// YOUR CODE HERE - END
 	// ----------------------------------------------------------------------
-	`include "solutions/ex4_solved.v"
 
 	// Current state register
 	always @(posedge clk) begin
