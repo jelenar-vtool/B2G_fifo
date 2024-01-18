@@ -2,6 +2,7 @@ class b2gfifo_covergroup extends uvm_component;
     `uvm_component_utils(b2gfifo_covergroup)
 	
 covergroup r_cg with function sample(bit [7:0] rdata,bit[1:0] addr, bit resp );
+	option.per_instance = 1 ;
    rdata_value: coverpoint rdata {
       bins data_min = {0};
       bins data_low_range = {[1:127]};
@@ -27,14 +28,15 @@ covergroup r_cg with function sample(bit [7:0] rdata,bit[1:0] addr, bit resp );
 	bins expected1= binsof(resp_value.resp_min)&& (binsof(addr_value.addr_zero ) || binsof(addr_value.addr_three ));
 	bins expected2= binsof(resp_value.resp_max)&& binsof(addr_value.addr_onetwo );
 }
-     rdataXaddr: cross wild_rdata, addr_value{
+    /* rdataXaddr: cross wild_rdata, addr_value{
 	bins uf= binsof(addr_value.addr_three)&& binsof(wild_rdata.underflow );
 	bins ovf= binsof(addr_value.addr_three)&& binsof(wild_rdata.overrflow );
 	bins ful= binsof(addr_value.addr_three)&& binsof(wild_rdata.full );
 	bins empy= binsof(addr_value.addr_three)&& binsof(wild_rdata.empty );	
-}
+}*/
   endgroup: r_cg
-covergroup w_cg with function sample(bit[7:0] wdata,bit[1:0] addr);     
+covergroup w_cg with function sample(bit[7:0] wdata,bit[1:0] addr);  
+	option.per_instance = 1 ;   
     wdata_value: coverpoint wdata {
       bins data_min = {0};
       bins data_low_range = {[1:127]};

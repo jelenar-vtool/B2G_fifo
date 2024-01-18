@@ -37,7 +37,7 @@ module simple_bin2gray (clk, rst_n, enable, addr, write, read, wdata, rdata, res
   
   //top level outputs 
   always_comb begin    
-    resp = (addr == 'h1 || addr == 'h2) && read;
+    resp = (addr == 'h1 || addr == 'h2) && read && enable;
 	case(addr)
 	   0 : rdata = fifo_data_out;
 	   1 : rdata = 0;

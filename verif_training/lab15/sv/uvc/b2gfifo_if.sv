@@ -10,7 +10,19 @@ interface b2gfifo_if(input clk,input  rst_n);
   //Declare all inputs and outputs
 
 
+property wr();
+	@(posedge clk)
+	not(write && read);
+	endproperty 
 
+     assert property  (wr);
+
+/*property resp_a();
+	@(negedge enable)
+	resp == 0;
+endproperty
+
+    assert property (resp_a);*/
 endinterface
   
     

@@ -9,11 +9,7 @@ package b2gfifo_env_pkg;
    `include "b2gfifo_env_cfg.sv"
    `include "b2gfifo_covergroup.sv"
 
-    `include "../rtl/b2gfifo_reg.sv"
-   `include "../rtl/b2gfifo_reg_block.sv"
-
-
-   `include "../rtl/b2gfifo_reg2bus.sv"
+    
    `include "b2gfifo_virtual_sequence.sv"
 
     `include "b2gfifo_scoreboard.sv"

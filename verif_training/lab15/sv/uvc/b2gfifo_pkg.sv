@@ -8,7 +8,11 @@ package b2gfifo_pkg;
     import uvm_pkg::*;
  //`include "b2gfifo_topvif"
  `include "b2gfifo_item.sv"
+ `include "../rtl/b2gfifo_reg.sv"
+   `include "../rtl/b2gfifo_reg_block.sv"
 
+
+   `include "../rtl/b2gfifo_reg2bus.sv"
  `include "b2gfifo_cfg.sv"
   `include "b2gfifo_master_sequencer.sv"
   //`include "b2gfifo_master_sequence.sv"

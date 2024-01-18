@@ -25,7 +25,7 @@ function void b2gfifo_base_test::build_phase(uvm_phase phase);
     // TODO: * * * Set the environment configuration to config_db * * *
     // Create and setup configuration objects:
 
-	`uvm_info("m","M", UVM_LOW);   
+
 
     m_env = b2gfifo_env::type_id::create("m_env", this);
     m_env_cfg = b2gfifo_env_cfg::type_id::create("m_env_cfg", this);

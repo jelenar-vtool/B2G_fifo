@@ -15,9 +15,10 @@ package b2gfifo_test_pkg;
     //`include "b2gfifo_empty_check_test.sv"
     //`include "b2gfifo_multiple_delayed_items_test.sv"
     `include "b2gfifo_write_full_test.sv"
-    //`include "b2gfifo_write_wrong_addr_test.sv"
+    `include "b2gfifo_write_wrong_addr_test.sv"
     `include "b2gfifo_error_test.sv"
     `include "b2gfifo_rand_test.sv"
+    `include "b2gfifo_backdoor_test.sv"
     // * * * You can include different sequences for specific test bellow * * *
 
 endpackage 

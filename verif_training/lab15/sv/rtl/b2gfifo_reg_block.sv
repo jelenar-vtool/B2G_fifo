@@ -2,23 +2,13 @@ class b2gfifo_reg_block extends uvm_reg_block;
   `uvm_object_utils(b2gfifo_reg_block)
 
 	rand b2gfifo_reg CTL_STAT;//RW
-	ral_coverage cg;
+	//ral_coverage cg;
     function new(string name="b2gfifo_reg_block");
 		super.new(name, UVM_NO_COVERAGE);
 	endfunction
     extern virtual function void build();
 	
-	/*function void add_hdl_path (
-	   	uvm_hdl_path_slice 	slices[],	  	
-	   	string 	kind	 = 	"RTL"
-	)
-function void add_hdl_path_slice(
-   	string 	name,	  	
-   	int 	offset,	  	
-   	int 	size,	  	
-   	bit 	first	 = 	0,
-   	string 	kind	 = 	"RTL"
-)*/
+	
 endclass:b2gfifo_reg_block
 //--------------------------------------------------------------------
 function void b2gfifo_reg_block::build();

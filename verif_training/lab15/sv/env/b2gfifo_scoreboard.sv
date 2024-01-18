@@ -27,27 +27,7 @@ class b2gfifo_scoreboard extends uvm_scoreboard;
      extern function void write_master (b2gfifo_item req);
      extern task run_phase (uvm_phase phase);
     extern function void phase_ready_to_end(uvm_phase phase);
-/*task backdoor_poll(uvm_reg_field field_name, int polling_duration, int polling_interval, bit value_to_be_polled);
-    uvm_reg        m_reg;
-    uvm_status_e   m_status;
-    uvm_reg_data_t m_data;
-    
-    m_reg = field_name.get_parent();
-    fork
-        begin
-            m_reg.read(m_status, m_data, UVM_BACKDOOR);
-            while(m_data != value_to_be_polled)begin
-                #(polling_interval * 1ns);
-                m_reg.read(m_status, m_data, UVM_BACKDOOR);
-            end 
-        end
-        begin
-            #(polling_duration * 1ns);
-            `uvm_error(get_type_name(), "Maximum polling duration reached")
-        end
-    join_any
-    disable fork;
-endtask */   
+  
 endclass
 
 //------------------------------------------------------------------------------------------------------------
@@ -86,9 +66,7 @@ bit [7:0] temp;
 		if(refw_fifo.size()== 0) begin  
 		  	ref_ctrl_start[3] =1; 
 			regmodel.CTL_STAT.fifo_underflow.predict(1);
-		/*fork 
-		backdoor_poll("regmodel.CTL_STAT.fifo_underflow", polling_duration, polling_interval, 1);
-		join_none*/
+		
 		end 
 		else begin 
 			ref_ctrl_start[2] =0;

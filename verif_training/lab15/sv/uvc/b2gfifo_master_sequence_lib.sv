@@ -692,5 +692,51 @@ task b2gfifo_error_sequence::body();
 	 
 
 endtask : body
+//-------------------------------------------------------------------------
+class b2gfifo_backdoor_sequence extends b2gfifo_empty_sequence;
+    
+
+   b2gfifo_item req;
+    b2gfifo_reg_block  regmodel;   
+   
+   `uvm_declare_p_sequencer(b2gfifo_master_sequencer)	
+   `uvm_object_utils(b2gfifo_backdoor_sequence)
+     
+    
+    extern function new(string name = "b2gfifo_backdoor_sequence"); 
+    extern virtual task body();   
+endclass : b2gfifo_error_sequence
+
+//-------------------------------------------------------------------
+function b2gfifo_backdoor_sequence::new(string name = "b2gfifo_backdoor_sequence");
+    super.new(name);
+endfunction : new
+
+//-------------------------------------------------------------------
+task b2gfifo_backdoor_sequence::body();
+	
+	uvm_status_e status; 
+	
+	bit [7:0] dv_data, mv_data;
+	bit [7:0] read_out;	
+	
+
+		$display(" ******************** backdoor write i.e poke ******************** ");
+
+									// poke method -> write the specified value in the dut reg
+		regmodel.CTL_STAT.poke(status, 8'd10);			// writing 10 to the h/w reg
+													// along with this it will update both desired & mirrored variables
+		dv_data = regmodel.CTL_STAT.get();			// get the desired variable, backdoor
+
+		mv_data = regmodel.CTL_STAT.get_mirrored_value();	// get the mirrored variable, backdoor
+
+		`uvm_info(get_type_name(), $sformatf(" After backdoor poke(poke - backdoor write) method, Desired value is %0d, Mirroed value is %0d",dv_data, mv_data), UVM_NONE)
+
+	regmodel.CTL_STAT.peek(status, read_out);
+	dv_data =regmodel.CTL_STAT.get();
+	mv_data =regmodel.CTL_STAT.get_mirrored_value();
+`uvm_info(get_type_name(), $sformatf(" After backdoor peek (peek - backdoor read) method, Desired value is %0d, Mirroed value is %0d, read_out is %0d",dv_data, mv_data, read_out), UVM_NONE)
+
+	endtask: body	
 
 

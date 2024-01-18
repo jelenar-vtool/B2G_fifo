@@ -57,9 +57,12 @@ task b2gfifo_monitor::run_phase(uvm_phase phase);
 	//Send the sampled transaction using write() 
   super.run_phase(phase);
 forever begin
-     @ (posedge b2gfifo_vif.clk);
+     @ (negedge b2gfifo_vif.clk);
+
+	
+	
   if (b2gfifo_vif.enable ==1) begin //mozes da stvais uslove, ako je read sta uzimas i ako je w sta uzimas, mogu poisebni alasis portovi ya write, read, resp
-     
+
 	if (b2gfifo_vif.write ==1)begin 
         req.write = b2gfifo_vif.write;
         req.read = b2gfifo_vif.read;  
