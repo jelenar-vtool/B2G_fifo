@@ -213,7 +213,7 @@ module traffic_lights (
 				y_l = 1;
 				g_l = 0;
 			end
-			else begin //YELLOW_OFF
+			else begin //the bag was here this values were switched 
 				r_l = 0;
 				y_l = 0;
 				g_l = 0;

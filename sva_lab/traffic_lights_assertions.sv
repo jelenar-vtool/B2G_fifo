@@ -44,10 +44,15 @@ module traffic_lights_assertions (
 	//             comment out line with `include statement, which is BELOW.
 	// ----------------------------------------------------------------------
 	// YOUR CODE HERE - START
-	
+	property p_go_stop (logic clk, logic rst, logic r, logic y, logic g);
+   	 @(posedge clk) disable iff (rst)
+        (s_turn_on(g) and $rose(y)) |-> 
+        (s_turn_off(r) and s_turn_on(y) and s_turn_off(g)) [*stop_go_duration] ##1 
+        (s_turn_on(r) and s_turn_off(y) and s_turn_off(g));
+	endproperty : p_go_stop
 
 
-
+	a_go_stop: assert property (p_go_stop(clk, rst_n | (time_of_day != daytime), r_l, y_l, g_l));
 
 
 
@@ -67,9 +72,17 @@ module traffic_lights_assertions (
 	//             comment out line with `include statement, which is BELOW.
 	// ----------------------------------------------------------------------
 	// YOUR CODE HERE - START
-	
+	property p_blink_yellow_night (logic clk, logic rst,  logic y );
+    	logic prev_yellow=0;
 
 
+ 		@(posedge clk) disable iff (rst)
+         (s_turn_on(y))|=>
+         (s_turn_off(y));
+
+	endproperty : p_blink_yellow_night
+
+	a_blink_yellow_night: assert property (p_blink_yellow_night(clk, rst_n| (time_of_day != nighttime), y_l));
 
 
 

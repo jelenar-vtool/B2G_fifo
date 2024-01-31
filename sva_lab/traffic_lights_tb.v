@@ -1,5 +1,5 @@
 `timescale 1ns/100ps
-
+//`include "traffic_lights_assertions.sv"
 module traffic_lights_tb;
 
 	reg clk, rst_n;
@@ -55,7 +55,7 @@ endmodule
 // YOUR CODE HERE - START
 
 
-
+bind traffic_lights traffic_lights_assertions all_inst(clk,rst_n,r_l,y_l,g_l, time_of_day, lights_state);
 
 
 
