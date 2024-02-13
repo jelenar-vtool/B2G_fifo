@@ -40,6 +40,12 @@ property end_of_trans2();
 endproperty
     assert property (end_of_trans1);
     assert property (end_of_trans2);
+/*property addr_a();
+	 @(posedge system_clock) disable iff(!reset_n)
+	 $rose(psel) |-> $stable(paddr);
+endproperty
+
+    assert property (addr_a);*/
 endinterface   
 
 

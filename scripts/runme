@@ -8,7 +8,7 @@ just_comp=0
 testdir="testdir"
 testfile="log.log"
 clean='0'
-filelist_path=$scripts/filelist.f
+filelist_path=$scripts/filelist1.f
 
 while getopts ':t:s:g:c:v:o:l:q:i:f:d:' flag; do
 
@@ -109,7 +109,7 @@ echo "${sim_runner} -clean -timescale 1ns/1ns -64bit ${coverage} -sysv ${gui} -a
 else
 cd $work_area/sv/tb;
 echo "${sim_runner} NO TEST -assert -64bit -sv -gui -access +rwc -linedebug -abvrecordcoverall -verbosity ${verbosity} ${linedebug} -seed ${seed} " 
-xrun top.sv -timescale 1ns/1ns -sysv -access +rwc -uvm -uvmhome CDNS-1.2 -seed ${seed} +UVM_VERBOSITY=${verbosity} -f $scripts/filelist.f;
+xrun top.sv -timescale 1ns/1ns -sysv -access +rwc -uvm -uvmhome CDNS-1.2 -seed ${seed} +UVM_VERBOSITY=${verbosity} -f $scripts/filelist1.f;
 mv xrun.log log.log
 mv log.log ../../log_dir/testdir
 fi
