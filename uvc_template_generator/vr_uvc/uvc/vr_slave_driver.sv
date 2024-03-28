@@ -75,12 +75,21 @@ task vr_slave_driver::reset_on_the_fly();
 	do_init();
 endtask
 task vr_slave_driver::do_drive(vr_item req);
-
-	@(posedge vr_vif.clk );
-			#100;
+	/*while(1) begin 
+		@(posedge vr_vif.clk );
+		if(vr_vif.s_ckb.valid == 1)	 begin 
 	   		vr_vif.s_ckb.ready<=1;
-			/*vr_vif.s_ckb.ready<=1;
+		end
+		break;
+	end 
+		@(posedge vr_vif.clk );
+	   	vr_vif.s_ckb.ready<=0;
+			vr_vif.s_ckb.ready<=1;
 	@(posedge vr_vif.clk)
 			vr_vif.s_ckb.ready<=0;*/
-
+		@(posedge vr_vif.clk);
+		repeat (req.delay+1)
+	   		vr_vif.s_ckb.ready<=1;
+				@(posedge vr_vif.clk iff (vr_vif.s_ckb.valid == 1));
+	   		vr_vif.s_ckb.ready<=0;
 endtask 

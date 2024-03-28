@@ -77,14 +77,16 @@ task vr_master_driver::do_drive(vr_item req);
 	while(1) begin 
 		@(posedge vr_vif.clk);
 		if(vr_vif.m_ckb.ready == 1)	 begin 
+     `uvm_info("Driver", "usli", UVM_LOW)
  			vr_vif.m_ckb.valid<=0;
     		vr_vif.m_ckb.data<=0;
-				break;
+			break;
 		end
+
 	end 
 
    
-     `uvm_info("Driver", "MASTER-do_drive task executed", UVM_LOW)
+     `uvm_info("Driver", "izasli", UVM_LOW)
 endtask
 
 
