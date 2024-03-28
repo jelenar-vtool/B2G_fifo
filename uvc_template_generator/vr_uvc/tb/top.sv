@@ -26,6 +26,7 @@ module top;
         reset_n = 0;
         #delay_reset; //async reset
         reset_n = 1;	
+				
 				    	
     end
     

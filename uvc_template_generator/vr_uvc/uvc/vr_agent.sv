@@ -4,7 +4,7 @@ class vr_agent#(parameter int DATA = 32) extends uvm_agent;
     `uvm_component_utils(vr_agent#(DATA))
 
     virtual vr_if#(DATA) vr_vif;
-      
+    bit reset_flag = 0;      
     vr_cfg                 cfg;
     vr_monitor#(DATA)            m_mon;
     vr_master_driver#(DATA)       m_drv;
@@ -15,7 +15,8 @@ class vr_agent#(parameter int DATA = 32) extends uvm_agent;
     extern function new (string name, uvm_component parent);
     extern virtual function void build_phase (uvm_phase phase);
     extern virtual function void connect_phase (uvm_phase phase);
-    
+   extern virtual task  pre_reset_phase (uvm_phase phase);  
+    extern virtual task  reset_on_the_fly();  
 endclass //vr_agent
 
 //-------------------------------------------------------------------------------------------------------------
@@ -60,5 +61,25 @@ function void vr_agent::connect_phase(uvm_phase phase);
         s_drv.seq_item_port.connect(s_seqr.seq_item_export);
         `uvm_info("connect_phase_vr_agent", "slave driver connected.", UVM_LOW);
     end
-   //  vr_vif.apb_baud_rate_value <= cfg.apb_baud_rate_divisor;
+
 endfunction // vr_agent::connect_phase
+//-------------------------------------------------------------------------------------------------------------
+task vr_agent::pre_reset_phase(uvm_phase phase);
+   if(m_seqr && m_drv) begin
+        `uvm_info("poruka", "lebac", UVM_LOW);
+	if (reset_flag)
+     m_seqr.stop_sequences();
+     
+   end
+   if(s_seqr && s_drv) begin
+	if (reset_flag)
+     s_seqr.stop_sequences();
+     
+   end
+ endtask : pre_reset_phase
+//------------------------------------------------------------------
+task vr_agent::reset_on_the_fly();
+    @(negedge vr_vif.reset_n);
+
+    reset_flag = 1;
+endtask
