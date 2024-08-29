@@ -65,6 +65,7 @@ bit [7:0] temp;
 	  if (req.addr == 0) begin 
 		if(refw_fifo.size()== 0) begin  
 		  	ref_ctrl_start[3] =1; 
+			ref_ctrl_start[5] =1; 
 			regmodel.CTL_STAT.fifo_underflow.predict(1);
 		
 		end 
@@ -92,6 +93,7 @@ bit [7:0] temp;
 		if (!(req.rdata[2] ===ref_ctrl_start[2])) begin  `uvm_error("ctl_start","error with overflow status indication") end
 		if (!(req.rdata[3] ===ref_ctrl_start[3])) begin  `uvm_error("ctl_start","error with FIFO underflow status indication")end 
 		if (!(req.rdata[4] ===ref_ctrl_start[4])) begin  `uvm_error("ctl_start","error with FIFO clr")end 
+		if (!(req.rdata[5] ===ref_ctrl_start[5])) begin  `uvm_error("ctl_start","error with new feture")end 
 			
 	 end
 	end
@@ -100,6 +102,7 @@ bit [7:0] temp;
 	  if (req.addr == 0  || req.addr == 1 || req.addr == 2) begin 
 		if(ref_ctrl_start[3] ==1) begin 
 			ref_ctrl_start[3] =0;
+			ref_ctrl_start[5] =0;
 			regmodel.CTL_STAT.fifo_underflow.predict(0);
 		end
 	 	if(refw_fifo.size()== 16) begin 

@@ -50,7 +50,6 @@ module simple_bin2gray (clk, rst_n, enable, addr, write, read, wdata, rdata, res
  //Status registers should reflect the values from fifo
  assign CTL_STAT[7:5] = 0;
  assign CTL_STAT[4] = fifo_reg_write;
- assign CTL_STAT[3] = fifo_underflow;
  assign CTL_STAT[2] = fifo_overflow;
  assign CTL_STAT[1] = fifo_full;
  assign CTL_STAT[0] = fifo_empty; 

@@ -20,7 +20,7 @@ class b2gfifo_item extends uvm_sequence_item;
  	extern function new(string name = "b2gfifo_item"); 
 	constraint wr_rd_c {soft  write != read;  }
 	constraint delay_c { delay< 10;}
-   	constraint w_addr3_c {if(addr == 2'b11) (wdata[5] ==0);(wdata[6] ==0);(wdata[7] ==0); }
+   	
 
 
 endclass : b2gfifo_item
